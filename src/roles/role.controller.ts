@@ -6,16 +6,21 @@ import {
   ApiBearerAuth,
   ApiCreatedResponse,
   ApiOperation,
+  ApiTags,
 } from '@nestjs/swagger';
 import { AuthGuard } from 'src/common/guards/auth.guard';
+import { Roles } from 'src/common/constants/role.contante';
+import { Permission } from 'src/common/enum/permission.enum';
 
-@ApiBearerAuth('jwt')
+@ApiBearerAuth('jwt-auth')
+@ApiTags('Roles')
 @UseGuards(AuthGuard)
 @Controller('role')
 export class RoleControler {
   constructor(private readonly roleService: RoleService) {}
 
   @Post()
+  @Roles(Permission.CREATE)
   @ApiOperation({ summary: 'Create Role' })
   @ApiCreatedResponse({ description: 'Role created with successfully' })
   @ApiBadRequestResponse({ description: 'Invalid data' })
@@ -24,11 +29,15 @@ export class RoleControler {
   }
 
   @Get()
+  @Roles(Permission.VIEW)
+  @ApiOperation({ summary: 'Get all Roles' })
   async findAll() {
     return await this.roleService.findAll();
   }
-
+  
   @Get(':id')
+  @Roles(Permission.VIEW)
+  @ApiOperation({ summary: 'Get Role' })
   async findOne(@Param('id') id: number) {
     return await this.roleService.findOne(id);
   }

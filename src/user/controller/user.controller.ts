@@ -37,7 +37,6 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  @Roles(Permission.CREATE)
   @ApiOperation({ summary: 'Create User' })
   @ApiCreatedResponse({ description: 'User created with successfully' })
   @ApiBadRequestResponse({ description: 'Invalid data' })

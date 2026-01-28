@@ -3,6 +3,7 @@ import {
   ApiBearerAuth,
   ApiOperation,
   ApiResponse,
+  ApiTags,
 } from '@nestjs/swagger/dist/decorators';
 import { UserService } from '../user.service';
 import { Roles } from 'src/common/constants/role.contante';
@@ -10,6 +11,7 @@ import { Permission } from 'src/common/enum/permission.enum';
 import { AuthGuard } from 'src/common/guards/auth.guard';
 
 @ApiBearerAuth('jwt-auth')
+@ApiTags('User Roles')
 @UseGuards(AuthGuard)
 @Controller('user/:id/role')
 export class UserRoleController {
@@ -25,18 +27,18 @@ export class UserRoleController {
 
   @Get()
   @Roles(Permission.VIEW)
-  @ApiOperation({ summary: 'Get users for roles' })
-  @ApiResponse({ status: 200, description: 'Users find' })
-  @ApiResponse({ status: 404, description: 'Users not found' })
+  @ApiOperation({ summary: 'Get users for roles id' })
+  @ApiResponse({ status: 200, description: 'User find' })
+  @ApiResponse({ status: 404, description: 'User not found' })
   findUsersForRoles(@Param('id') user_id: number) {
     return this.userService.getUserRoles(user_id);
   }
 
   @Get(':rolesId')
   @Roles(Permission.VIEW)
-  @ApiOperation({ summary: 'Get users for roles' })
-  @ApiResponse({ status: 200, description: 'Users find' })
-  @ApiResponse({ status: 404, description: 'Users not found' })
+  @ApiOperation({ summary: 'Get users roles' })
+  @ApiResponse({ status: 200, description: 'User find' })
+  @ApiResponse({ status: 404, description: 'User not found' })
   findRoles(@Param('id') user_id: number) {
     return this.userService.getUserRoles(user_id);
   }

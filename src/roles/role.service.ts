@@ -33,7 +33,8 @@ export class RoleService {
       throw new ConflictException('Código já existente');
     }
 
-    const role = await this.roleRepository.createRole(createRoleDto);
+    const newRole = new CreateRoleDto(createRoleDto).asEntity(new Role())
+    const role = await this.roleRepository.createRole(newRole);
     return role.id;
   }
 }

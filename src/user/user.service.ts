@@ -42,9 +42,13 @@ export class UserService {
     return this.userRepository.paginationList(pagination);
   }
 
-  async findOne(id: number): Promise<User | null> {
+  async findOne(id: number): Promise<Partial<User> | null> {
     const user = await this.userRepository.getById(id);
-    return user;
+    return { 
+      id: user?.id,
+      name: user?.name,
+      email: user?.email,
+    };
   }
 
   async findOneByEmail(email: string): Promise<User | null> {
