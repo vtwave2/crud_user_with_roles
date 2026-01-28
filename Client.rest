@@ -1,0 +1,54 @@
+@baseUrl = http://localhost:3000
+
+###
+GET {{baseUrl}}/user?pageStart=0&pageSize=5&name=jhon
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJqb2FvMkBnbWFpbC5jb20iLCJyb2xlcyI6WyJWSUVXIl0sImlhdCI6MTc2OTU0MjM1MywiZXhwIjoxNzY5NTQ0MTUzfQ.nj43y1K9NhXfCrTEUGVysLQmrifZQkmD_6rmkFHXTvs
+
+### CREATE
+POST {{baseUrl}}/user
+Content-Type: application/json
+
+{
+    "name": "jhon",
+    "email": "joao1@gmail.com",
+    "password": "joao@123"
+}
+
+### FIND ONE
+GET {{baseUrl}}/user/4
+
+
+### UPDATE
+PATCH {{baseUrl}}/user/3
+Content-Type: application/json
+
+{
+    "name": "jhon UPDATE",
+    "password": "joao@123"
+}
+
+### DELETE
+DELETE  {{baseUrl}}/user/1
+
+
+### AUTH LOGIN
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+    "email": "joao2@gmail.com",
+    "password": "joao@123"
+}
+
+###
+POST {{baseUrl}}/user/3/roleId
+Content-Type: application/json
+
+{
+    "role": ["ADMIN"]
+}
+
+
+###
+GET {{baseUrl}}/user/2/role
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJqb2FvMkBnbWFpbC5jb20iLCJyb2xlcyI6WyJWSUVXIl0sImlhdCI6MTc2OTU0MjM1MywiZXhwIjoxNzY5NTQ0MTUzfQ.nj43y1K9NhXfCrTEUGVysLQmrifZQkmD_6rmkFHXTvs

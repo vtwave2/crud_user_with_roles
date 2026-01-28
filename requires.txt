@@ -1,0 +1,19 @@
+proxy 
+rxjs
+
+Objetos em JavaScript
+
+if (filtros.pageSize) {
+    const skip = filtros.pageStart * filtros.pageSize;
+        if (skip) {
+            query.skip(skip);
+        }
+        if (filtros.pageSize) {
+            query.take(filtros.pageSize);
+        }
+}
+
+Docker 
+
+
+
