@@ -26,7 +26,8 @@ import { UsePipes } from '@nestjs/common';
 import { AuthGuard } from 'src/common/guards/auth.guard';
 import { ListUserDto } from '../dto/list-user.dto';
 import { Roles } from 'src/common/constants/role.contante';
-import { Permission } from 'src/common/enum/permission.enum';
+import { Permissions } from 'src/user/constants/permissions.constants';
+import { User } from '../entities/user.entity';
 
 @ApiBearerAuth('jwt-auth')
 @ApiTags('User')
@@ -40,44 +41,47 @@ export class UserController {
   @ApiOperation({ summary: 'Create User' })
   @ApiCreatedResponse({ description: 'User created with successfully' })
   @ApiBadRequestResponse({ description: 'Invalid data' })
-  create(@Body() createUserDto: CreateUserDto) {
+  create(@Body() createUserDto: CreateUserDto): Promise<number> {
     return this.userService.create(createUserDto);
   }
 
   @Get()
-  @Roles(Permission.VIEW)
+  @Roles(Permissions.VIEW)
   @ApiOperation({ summary: 'List all users' })
   @ApiResponse({
     status: 200,
     description: 'List of users returned with success',
   })
-  findAll(@Query() pagination: ListUserDto) {
+  findAll(@Query() pagination: ListUserDto): Promise<User[]> {
     return this.userService.findAll(pagination);
   }
 
   @Get(':id')
-  @Roles(Permission.VIEW)
+  @Roles(Permissions.VIEW)
   @ApiOperation({ summary: 'Search user for ID' })
   @ApiResponse({ status: 200, description: 'User find' })
   @ApiResponse({ status: 404, description: 'User not found' })
-  findOne(@Param('id') id: number) {
+  findOne(@Param('id') id: number): Promise<Partial<User>> {
     return this.userService.findOne(id);
   }
 
   @Patch(':id')
-  @Roles(Permission.EDIT)
+  @Roles(Permissions.EDIT)
   @ApiOperation({ summary: 'Update user' })
   @ApiResponse({ status: 200, description: 'User updated' })
   @ApiResponse({ status: 404, description: 'User not found' })
-  update(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto) {
+  update(
+    @Param('id') id: number,
+    @Body() updateUserDto: UpdateUserDto,
+  ): Promise<boolean> {
     return this.userService.update(id, updateUserDto);
   }
 
-  @Roles(Permission.DELETE)
+  @Roles(Permissions.DELETE)
   @ApiOperation({ summary: 'Remove user' })
   @ApiNoContentResponse({ description: 'User removed' })
   @Delete(':id')
-  remove(@Param('id') id: number) {
+  remove(@Param('id') id: number): Promise<void> {
     return this.userService.remove(id);
   }
 }

@@ -1,5 +1,4 @@
 import { IsOptional, IsString } from 'class-validator';
-import { Permission } from 'src/common/enum/permission.enum';
 import { Role } from '../entity/role.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -8,7 +7,7 @@ export class CreateRoleDto {
   @IsString()
   nome: string;
 
-  @ApiProperty({ enum: Permission, isArray: true })
+  @ApiProperty()
   @IsString()
   codigo: string;
 

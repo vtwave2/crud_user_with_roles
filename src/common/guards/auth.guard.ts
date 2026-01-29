@@ -8,7 +8,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import { Reflector } from '@nestjs/core';
 import { ROLES_KEY } from '../constants/role.contante';
-import { Permission } from '../enum/permission.enum';
+import { Permissions } from 'src/user/constants/permissions.constants';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request: Request = context.switchToHttp().getRequest();
     const token = this.extractTokenFromHeader(request);
-    const requiredRoles = this.reflector.getAllAndOverride<Permission[]>(
+    const requiredRoles = this.reflector.getAllAndOverride<Permissions[]>(
       ROLES_KEY,
       [context.getHandler(), context.getClass()],
     );

@@ -16,7 +16,7 @@ export class RoleService {
   }
 
   async findOne(id: number): Promise<Role | null> {
-    const role = await this.roleRepository.findOneBy({id});
+    const role = await this.roleRepository.findOneBy({ id });
 
     if (role === null) throw new BadRequestException('Role not found');
     return role;
@@ -33,7 +33,7 @@ export class RoleService {
       throw new ConflictException('Código já existente');
     }
 
-    const newRole = new CreateRoleDto(createRoleDto).asEntity(new Role())
+    const newRole = new CreateRoleDto(createRoleDto).asEntity(new Role());
     const role = await this.roleRepository.createRole(newRole);
     return role.id;
   }

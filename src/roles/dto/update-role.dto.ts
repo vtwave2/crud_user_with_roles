@@ -1,10 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsEnum } from 'class-validator';
-import { Permission } from 'src/common/enum/permission.enum';
+import { IsArray } from 'class-validator';
 
 export class UpdateUserRolesDto {
   @ApiProperty()
   @IsArray()
-  @IsEnum(Permission, { each: true })
-  roles: Permission[];
+  roles: string;
 }

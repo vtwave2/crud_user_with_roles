@@ -42,9 +42,9 @@ export class UserService {
     return this.userRepository.paginationList(pagination);
   }
 
-  async findOne(id: number): Promise<Partial<User> | null> {
+  async findOne(id: number): Promise<Partial<User>> {
     const user = await this.userRepository.getById(id);
-    return { 
+    return {
       id: user?.id,
       name: user?.name,
       email: user?.email,
@@ -90,17 +90,21 @@ export class UserService {
     return user;
   }
 
-  async remove(id: number) {
+  async getUserForCodigo(codigo: string): Promise<UserRole[]> {
+    const user = await this.userRoleRepository.getUserForCodigo(codigo);
+    return user;
+  }
+
+  async remove(id: number): Promise<void> {
     const user = await this.userRepository.findOne({ where: { id } });
 
     if (!user) {
       throw new NotFoundException(`User ID ${id} not found`);
     }
     await this.userRepository.delete(id);
-    return;
   }
 
-  async getRoles(userId: number, roleId: number) {
+  async getRoles(userId: number, roleId: number): Promise<UserRole[]> {
     return await this.userRoleRepository.getUserRoles(userId, roleId);
   }
 }

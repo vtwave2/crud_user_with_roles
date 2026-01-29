@@ -52,3 +52,12 @@ Content-Type: application/json
 ###
 GET {{baseUrl}}/user/2/role
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJqb2FvMkBnbWFpbC5jb20iLCJyb2xlcyI6WyJWSUVXIl0sImlhdCI6MTc2OTU0MjM1MywiZXhwIjoxNzY5NTQ0MTUzfQ.nj43y1K9NhXfCrTEUGVysLQmrifZQkmD_6rmkFHXTvs
+
+### TESTE
+
+
+@testUrl = https://api.exchangeratesapi.com.au/latest
+
+###
+GET {{testUrl}}
+Authorization: Bearer littlemountain_c0148e8fdc9862a542bc23c424adb258

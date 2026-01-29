@@ -17,8 +17,29 @@ export class UserRoleRepository extends Repository<UserRole> {
     return this.createQueryBuilder('userRole')
       .innerJoin('userRole.role', 'role')
       .innerJoin('userRole.user', 'user')
-      .select(['user.id', 'user.name','userRole.id', 'role.codigo', 'role.nome'])
+      .select([
+        'user.id',
+        'user.name',
+        'userRole.id',
+        'role.codigo',
+        'role.nome',
+      ])
       .where('user.id = :userId', { userId })
+      .getMany();
+  }
+
+  getUserForCodigo(codigo: string): Promise<UserRole[]> {
+    return this.createQueryBuilder('userRole')
+      .innerJoin('userRole.role', 'role')
+      .innerJoin('userRole.user', 'user')
+      .select([
+        'user.id',
+        'user.name',
+        'userRole.id',
+        'role.codigo',
+        'role.nome',
+      ])
+      .where('role.codigo = :codigo', { codigo })
       .getMany();
   }
 

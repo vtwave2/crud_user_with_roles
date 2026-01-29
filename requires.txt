@@ -16,4 +16,9 @@ if (filtros.pageSize) {
 Docker 
 
 
+API https://docs.exchangeratesapi.com.au/authentication
+
+API_KEY = littlemountain_c0148e8fdc9862a542bc23c424adb258
+
+
 

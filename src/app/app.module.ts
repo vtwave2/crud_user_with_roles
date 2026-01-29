@@ -4,12 +4,14 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from 'src/auth/auth.module';
 import { RolesModule } from 'src/roles/roles.module';
+import { CoinModule } from 'src/coin/coin.module';
 
 @Module({
   imports: [
     UserModule,
-    AuthModule,
     RolesModule,
+    CoinModule,
+    AuthModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
