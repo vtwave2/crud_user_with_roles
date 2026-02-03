@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -44,5 +45,9 @@ export class CoinController {
     @Body() updateCoinDto: UpdateCoinDto,
   ): Promise<boolean> {
     return await this.coinService.updateCoin(id, updateCoinDto);
+  }
+  @Delete(':id')
+  async remove(@Param('id') id: number): Promise<boolean> {
+    return await this.coinService.remove(id);
   }
 }

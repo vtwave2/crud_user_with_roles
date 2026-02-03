@@ -1,7 +1,9 @@
+import { Wallet } from 'src/wallet/entity/wallet.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -14,7 +16,7 @@ export class Coin {
   @Column({ unique: true, length: 4 })
   codigo: string;
 
-  @Column()
+  @Column('decimal')
   price: number;
 
   @CreateDateColumn()
@@ -22,4 +24,7 @@ export class Coin {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @OneToMany(() => Wallet, (wallet) => wallet.coin)
+  wallet: Wallet[];
 }

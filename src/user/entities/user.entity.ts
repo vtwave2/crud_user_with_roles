@@ -7,6 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { UserRole } from './user-role.entity';
+import { Wallet } from 'src/wallet/entity/wallet.entity';
 
 @Entity('users')
 export class User {
@@ -30,4 +31,7 @@ export class User {
 
   @OneToMany(() => UserRole, (ur) => ur.role)
   userRoles: UserRole[];
+
+  @OneToMany(() => Wallet, (wallet) => wallet.user)
+  wallet: Wallet[];
 }

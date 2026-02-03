@@ -8,5 +8,6 @@ import { CoinController } from './controller/coin.controller';
   imports: [TypeOrmModule.forFeature([Coin])],
   providers: [CoinService],
   controllers: [CoinController],
+  exports: [CoinService],
 })
 export class CoinModule {}

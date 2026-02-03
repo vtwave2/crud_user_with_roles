@@ -42,4 +42,13 @@ export class CoinService {
 
     return !!(await this.coinRepository.save(updateCoinDto));
   }
+
+  async remove(id: number): Promise<boolean> {
+    const coin = await this.coinRepository.findOne({ where: { id: id } });
+    if (!coin) {
+      throw new BadRequestException('Coin not found');
+    }
+    await this.coinRepository.delete(coin);
+    return true;
+  }
 }
