@@ -1,4 +1,6 @@
 export const Permission = {
   CREATE_COIN: 'CREATE_COIN',
   EDIT_COIN: 'EDIT_COIN',
+  VIEW_COIN: 'VIEW_COIN',
+  DELETE_COIN: 'DELETE_COIN',
 };

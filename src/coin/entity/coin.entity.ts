@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import { Wallet } from 'src/wallet/entity/wallet.entity';
 import {
   Column,
@@ -17,6 +18,7 @@ export class Coin {
   codigo: string;
 
   @Column('decimal')
+  @Type(() => Number)
   price: number;
 
   @CreateDateColumn()

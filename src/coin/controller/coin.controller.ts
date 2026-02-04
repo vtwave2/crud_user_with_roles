@@ -21,6 +21,7 @@ import { UpdateCoinDto } from '../dto/update-coin.dto';
 @Controller('coin')
 export class CoinController {
   constructor(private readonly coinService: CoinService) {}
+
   @Post()
   @ApiOperation({ summary: 'Add a new coin' })
   async create(@Body() createCoinDto: CreateCoinDto): Promise<number> {
@@ -46,6 +47,7 @@ export class CoinController {
   ): Promise<boolean> {
     return await this.coinService.updateCoin(id, updateCoinDto);
   }
+
   @Delete(':id')
   async remove(@Param('id') id: number): Promise<boolean> {
     return await this.coinService.remove(id);
